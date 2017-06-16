@@ -71,3 +71,6 @@ proguard/
 #Gradle
 .gradletasknamecache
 build/
+tokens
+pageIds
+fbpost
