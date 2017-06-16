@@ -5,7 +5,9 @@ import datastore.FBPostRepository;
 import fb.crawler.post.Posts;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 @Slf4j
@@ -16,7 +18,13 @@ public class FBPostCsvRepository implements FBPostRepository {
 
     public  FBPostCsvRepository() throws IOException{
         postsMap = new HashMap<>();
-        List<String> posts = FileUtil.reader(CSV_FILE);
+        List<String> posts;
+        try {
+            posts = FileUtil.reader(CSV_FILE);
+        }catch (Exception f){
+            posts = new ArrayList<>();
+        }
+
         posts.forEach(p -> {
             try {
                 Posts.Post post = OBJECT_MAPPER.readValue(p, Posts.Post.class);

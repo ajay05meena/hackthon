@@ -6,10 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +33,7 @@ public class FileUtil {
         }
     }
 
-    public static List<String> reader(String fileName){
+    public static List<String> reader(String fileName) throws FileNotFoundException{
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);

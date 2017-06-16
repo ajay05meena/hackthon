@@ -3,6 +3,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import com.sun.jersey.api.client.Client;
+import fb.crawler.FBCrawler;
 import fb.crawler.post.FetchPosts;
 
 public class Application {
@@ -10,8 +11,8 @@ public class Application {
 
     public static void main(String [] args){
         Injector injector = inject();
-        FetchPosts fetchPosts = injector.getInstance(FetchPosts.class);
-        fetchPosts.execute("nike");
+        FBCrawler fbCrawler = injector.getInstance(FBCrawler.class);
+        fbCrawler.run();
     }
 
     private static Injector inject(){
