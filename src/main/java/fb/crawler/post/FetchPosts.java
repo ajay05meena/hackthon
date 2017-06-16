@@ -1,6 +1,7 @@
 package fb.crawler.post;
 
 import datastore.FBPostRepository;
+import datastore.FBTokenReposistory;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
@@ -16,11 +17,13 @@ public class FetchPosts {
     private static final String ACCESS_TOKEN_LABEL = "access_token";
     private Provider<FetchPostCommand> fetchPostCommandProvider;
     private FBPostRepository fbPostRepository;
+    private FBTokenReposistory fbTokenReposistory;
 
     @Inject
-    public FetchPosts(Provider<FetchPostCommand> fetchPostCommandProvider, FBPostRepository fbPostRepository) {
+    public FetchPosts(Provider<FetchPostCommand> fetchPostCommandProvider, FBPostRepository fbPostRepository, FBTokenReposistory fbTokenReposistory) {
         this.fetchPostCommandProvider = fetchPostCommandProvider;
         this.fbPostRepository = fbPostRepository;
+        this.fbTokenReposistory = fbTokenReposistory;
     }
 
     public boolean execute(String fbPageId){
@@ -44,9 +47,8 @@ public class FetchPosts {
     }
 
     private URI getUriToFetchPostForFBpage(String fbPageId) {
-        String accessToken = "EAACEdEose0cBAPK70ggRRNJTIWQ4VfmvQZCsePnFGAJq7JemIMIzSlqq8Frs6GjUqAkswbmf2ud046MVCRZCBEUQyAoHOkzm1l1nRPliIKtgJnoPmrqBtYeRO11O7bQ2iLPpJ4UEWwicpVau81ZCUliQAsVYLZBnNdz46YNNOvkr1S8awWyJPmBxDMmTCUoZD";
-        URI uri = UriBuilder.fromUri(BASE_URL).path(fbPageId + "/" + POSTS_LABEL)
+        String accessToken = fbTokenReposistory.getRandomToken();
+        return UriBuilder.fromUri(BASE_URL).path(fbPageId + "/" + POSTS_LABEL)
                 .queryParam(ACCESS_TOKEN_LABEL, accessToken).build();
-        return uri;
     }
 }

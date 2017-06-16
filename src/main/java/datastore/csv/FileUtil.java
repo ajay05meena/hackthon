@@ -33,7 +33,7 @@ public class FileUtil {
         }
     }
 
-    public static List<String> reader(String fileName) throws FileNotFoundException{
+    public static List<String> reader(String fileName){
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
