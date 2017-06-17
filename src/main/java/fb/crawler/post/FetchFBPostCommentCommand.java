@@ -24,7 +24,7 @@ public class FetchFBPostCommentCommand extends HystrixCommand<Posts.Comments> {
     @Override
     protected Posts.Comments run() throws Exception {
         URI uri = UriBuilder.fromUri(this.uri).build();
-        log.info("Fetching post from {}", uri);
+        log.debug("Fetching post from {}", uri);
         String res = client.resource(uri).get(String.class);
         return new ObjectMapper().readValue(res, Posts.Comments.class);
     }

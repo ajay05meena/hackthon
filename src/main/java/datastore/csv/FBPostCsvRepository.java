@@ -3,6 +3,7 @@ package datastore.csv;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import datastore.FBPostRepository;
 import datastore.dao.PostDao;
+import fb.config.Config;
 import fb.crawler.post.Posts;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,22 +14,21 @@ import java.util.HashMap;
 import java.util.List;
 @Slf4j
 public class FBPostCsvRepository implements FBPostRepository {
-    static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    final private String CSV_FILE = "fbpost";
+
     private HashMap<String, PostDao> postsMap;
 
     public  FBPostCsvRepository(){
         postsMap = new HashMap<>();
         List<String> posts;
         try {
-            posts = FileUtil.reader(CSV_FILE);
+            posts = FileUtil.reader(Config.FB_POST_CSV);
         }catch (Exception f){
             posts = new ArrayList<>();
         }
 
         posts.forEach(p -> {
             try {
-                Posts.Post post = OBJECT_MAPPER.readValue(p, Posts.Post.class);
+                Posts.Post post = Config.OBJECT_MAPPER.readValue(p, Posts.Post.class);
                 postsMap.put(post.getId(), new PostDao(post.getId(), post.getMessage()));
             }catch (IOException e){
                 log.error("Error in build Csv rep {}", e);
@@ -42,7 +42,7 @@ public class FBPostCsvRepository implements FBPostRepository {
     public int perist(List<PostDao> posts) {
         posts.stream().forEach(p -> {
             if(!postsMap.containsKey(p.getId())){
-                //FileUtil.writer(p, CSV_FILE);
+                FileUtil.writer(p, Config.FB_POST_CSV);
             }
             postsMap.put(p.getId(), p);
         });
@@ -52,7 +52,7 @@ public class FBPostCsvRepository implements FBPostRepository {
     @Override
     public int persist(Posts.Post post) {
         postsMap.put(post.getId(), new PostDao(post.getId(), post.getMessage()));
-        //FileUtil.writer(new PostDao(post.getId(), post.getMessage()), CSV_FILE);
+        FileUtil.writer(new PostDao(post.getId(), post.getMessage()), Config.FB_POST_CSV);
         return 1;
     }
 
