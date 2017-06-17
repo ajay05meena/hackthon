@@ -1,12 +1,12 @@
 package datastore.csv;
 
-import datastore.FBTokenReposistory;
+import datastore.FBTokenRepository;
 
 
 import java.util.Collections;
 import java.util.List;
 
-public class FBTokenCsvReposistory implements FBTokenReposistory{
+public class FBTokenCsvRepository implements FBTokenRepository {
     private final static String CSV_FILE = "tokens";
     @Override
     public String getRandomToken() {

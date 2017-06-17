@@ -7,33 +7,31 @@ import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.sun.jersey.api.client.Client;
 import lombok.extern.slf4j.Slf4j;
 
-
 import javax.inject.Inject;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 @Slf4j
-public class FetchPostCommand extends HystrixCommand<Posts> {
+public class FetchFBPostLikeCommand extends HystrixCommand<Posts.Likes>{
     private URI uri;
     private Client client;
 
     @Inject
-    public FetchPostCommand(Client client){
+    public FetchFBPostLikeCommand(Client client){
         super(HystrixCommandGroupKey.Factory.asKey("FBPostGroup"), 1000*60);
         this.client = client;
     }
 
     @Override
-    protected Posts run() throws Exception {
+    protected Posts.Likes run() throws Exception {
         URI uri = UriBuilder.fromUri(this.uri).build();
-        log.info("Fetching post from {}", uri);
+        log.debug("Fetching post from {}", uri);
         String res = client.resource(uri).get(String.class);
-        return new ObjectMapper().readValue(res, Posts.class);
+        return new ObjectMapper().readValue(res, Posts.Likes.class);
     }
 
-    public FetchPostCommand withUri(URI uri){
+    public FetchFBPostLikeCommand withUri(URI uri){
         this.uri = uri;
         return this;
     }
-
 }

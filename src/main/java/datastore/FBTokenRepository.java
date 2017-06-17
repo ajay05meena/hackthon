@@ -1,5 +1,5 @@
 package datastore;
 
-public interface FBTokenReposistory {
+public interface FBTokenRepository {
     String getRandomToken();
 }

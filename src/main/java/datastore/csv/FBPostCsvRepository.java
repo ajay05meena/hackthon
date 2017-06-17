@@ -2,6 +2,7 @@ package datastore.csv;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import datastore.FBPostRepository;
+import datastore.dao.PostDao;
 import fb.crawler.post.Posts;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,9 +15,9 @@ import java.util.List;
 public class FBPostCsvRepository implements FBPostRepository {
     static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     final private String CSV_FILE = "fbpost";
-    private HashMap<String, Posts.Post> postsMap;
+    private HashMap<String, PostDao> postsMap;
 
-    public  FBPostCsvRepository() throws IOException{
+    public  FBPostCsvRepository(){
         postsMap = new HashMap<>();
         List<String> posts;
         try {
@@ -28,7 +29,7 @@ public class FBPostCsvRepository implements FBPostRepository {
         posts.forEach(p -> {
             try {
                 Posts.Post post = OBJECT_MAPPER.readValue(p, Posts.Post.class);
-                postsMap.put(post.getId(), post);
+                postsMap.put(post.getId(), new PostDao(post.getId(), post.getMessage()));
             }catch (IOException e){
                 log.error("Error in build Csv rep {}", e);
                 throw new RuntimeException(e);
@@ -38,20 +39,20 @@ public class FBPostCsvRepository implements FBPostRepository {
     }
 
     @Override
-    public int perist(Posts posts) {
-        posts.getData().stream().forEach(p -> {
+    public int perist(List<PostDao> posts) {
+        posts.stream().forEach(p -> {
             if(!postsMap.containsKey(p.getId())){
-                FileUtil.writer(p, CSV_FILE);
+                //FileUtil.writer(p, CSV_FILE);
             }
             postsMap.put(p.getId(), p);
         });
-        return posts.getData().size();
+        return posts.size();
     }
 
     @Override
     public int persist(Posts.Post post) {
-        postsMap.put(post.getId(), post);
-        FileUtil.writer(post, CSV_FILE);
+        postsMap.put(post.getId(), new PostDao(post.getId(), post.getMessage()));
+        //FileUtil.writer(new PostDao(post.getId(), post.getMessage()), CSV_FILE);
         return 1;
     }
 
