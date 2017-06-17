@@ -28,7 +28,7 @@ public class FetchFBPostCommand extends HystrixCommand<Posts> {
         URI uri = UriBuilder.fromUri(this.uri).build();
         log.debug("Fetching post from {}", uri);
         String res = client.resource(uri).get(String.class);
-6        return new ObjectMapper().readValue(res, Posts.class);
+        return new ObjectMapper().readValue(res, Posts.class);
     }
 
     public FetchFBPostCommand withUri(URI uri){
