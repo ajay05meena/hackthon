@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds.iml" filepath="$PROJECT_DIR$/.idea/modules/ds.iml" group="ds" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds/ds_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ds/ds_main.iml" group="ds" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds/ds_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ds/ds_test.iml" group="ds" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hackathon.iml" filepath="$PROJECT_DIR$/.idea/modules/hackathon.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hackathon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hackathon_main.iml" group="hackathon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hackathon_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hackathon_test.iml" group="hackathon" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler.iml" group="web-crawler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_main.iml" group="web-crawler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_test.iml" group="web-crawler" />
     </modules>
   </component>
 </project>
