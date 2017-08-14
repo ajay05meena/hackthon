@@ -1,2 +1,4 @@
 rootProject.name = 'hackathon'
+include 'ds'
+include 'web-crawler'
 
