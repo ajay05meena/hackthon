@@ -5,10 +5,14 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="concepts_main" target="1.8" />
+      <module name="concepts_test" target="1.8" />
       <module name="ds_main" target="1.8" />
       <module name="ds_test" target="1.8" />
       <module name="hackathon_main" target="1.8" />
       <module name="hackathon_test" target="1.8" />
+      <module name="java_concepts_main" target="1.8" />
+      <module name="java_concepts_test" target="1.8" />
       <module name="web-crawler_main" target="1.8" />
       <module name="web-crawler_test" target="1.8" />
     </bytecodeTargetLevel>

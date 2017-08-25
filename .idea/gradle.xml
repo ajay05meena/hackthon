@@ -10,7 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/concepts" />
             <option value="$PROJECT_DIR$/ds" />
+            <option value="$PROJECT_DIR$/java_concepts" />
             <option value="$PROJECT_DIR$/web-crawler" />
           </set>
         </option>
