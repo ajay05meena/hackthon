@@ -1,0 +1,19 @@
+group 'ex.crawler.fb'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+ext {
+    dropwizardVersion = '1.0.5'
+
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+
+}
