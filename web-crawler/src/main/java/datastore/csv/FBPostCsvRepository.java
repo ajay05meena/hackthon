@@ -1,13 +1,11 @@
 package datastore.csv;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import datastore.FBPostRepository;
 import datastore.dao.PostDao;
 import fb.config.Config;
-import fb.crawler.post.Posts;
+import fb.crawler.fb.Posts;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

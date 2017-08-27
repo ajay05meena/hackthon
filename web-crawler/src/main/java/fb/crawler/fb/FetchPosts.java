@@ -1,4 +1,4 @@
-package fb.crawler.post;
+package fb.crawler.fb;
 
 import datastore.FBPostCommentRepository;
 import datastore.FBPostLikeRepository;
@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class FetchPosts {
-    private static String BASE_URL = "https://graph.facebook.com/";
+      private static String BASE_URL = "https://graph.facebook.com/";
     private static final String POSTS_LABEL = "posts";
     private static final String ACCESS_TOKEN_LABEL = "access_token";
     private Provider<FetchFBPostCommand> fetchPostCommandProvider;
@@ -31,9 +32,10 @@ public class FetchPosts {
     private FBPostLikeRepository fbPostLikeRepository;
     private FBPostCommentRepository fbPostCommentRepository;
     private final ExecutorService executorService;
+    private final Provider<GetFbPageDetailCommand> getFbPageDetailCommandProvider;
 
     @Inject
-    public FetchPosts(Provider<FetchFBPostCommand> fetchPostCommandProvider, Provider<FetchFBPostLikeCommand> fetchFBPostLikeCommandProvider, Provider<FetchFBPostCommentCommand> fetchFBPostCommentCommandProvider, FBPostRepository fbPostRepository, FBTokenRepository fbTokenRepository, FBPostLikeRepository fbPostLikeRepository, FBPostCommentRepository fbPostCommentRepository, ExecutorService executorService) {
+    public FetchPosts(Provider<FetchFBPostCommand> fetchPostCommandProvider, Provider<FetchFBPostLikeCommand> fetchFBPostLikeCommandProvider, Provider<FetchFBPostCommentCommand> fetchFBPostCommentCommandProvider, FBPostRepository fbPostRepository, FBTokenRepository fbTokenRepository, FBPostLikeRepository fbPostLikeRepository, FBPostCommentRepository fbPostCommentRepository, ExecutorService executorService, Provider<GetFbPageDetailCommand> getFbPageDetailCommandProvider) {
         this.fetchPostCommandProvider = fetchPostCommandProvider;
         this.fetchFBPostLikeCommandProvider = fetchFBPostLikeCommandProvider;
         this.fetchFBPostCommentCommandProvider = fetchFBPostCommentCommandProvider;
@@ -42,7 +44,15 @@ public class FetchPosts {
         this.fbPostLikeRepository = fbPostLikeRepository;
         this.fbPostCommentRepository = fbPostCommentRepository;
         this.executorService = executorService;
+        this.getFbPageDetailCommandProvider = getFbPageDetailCommandProvider;
     }
+
+    public String pageDetail(String fbpageId){
+        String token = fbTokenRepository.getRandomToken();
+        URI uri = UriBuilder.fromUri(BASE_URL).path(fbpageId).queryParam("access_token", token).build();
+        return getFbPageDetailCommandProvider.get().withUri(uri).execute();
+    }
+
 
     public boolean run(String fbPageId){
         URI uri = getUriToFetchPostForFBpage(fbPageId);
