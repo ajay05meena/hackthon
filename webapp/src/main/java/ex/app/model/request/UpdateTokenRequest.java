@@ -2,7 +2,7 @@ package ex.app.model.request;
 
 import io.dropwizard.jackson.JsonSnakeCase;
 import lombok.Data;
-import model.AccessToken;
+import fb.crawler.fb.model.AccessToken;
 
 @JsonSnakeCase
 @Data

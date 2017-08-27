@@ -1,7 +1,7 @@
 package datastore;
 
 import datastore.dao.PostDao;
-import fb.crawler.fb.Posts;
+import fb.crawler.fb.model.Posts;
 
 import java.util.List;
 
