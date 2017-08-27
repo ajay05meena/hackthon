@@ -1,4 +1,7 @@
+package module;
+
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
 import com.google.inject.Scope;
 import datastore.FBPageRepository;
 import datastore.FBPostCommentRepository;
@@ -10,12 +13,15 @@ import datastore.csv.FBPostCommentCsvRepository;
 import datastore.csv.FBPostCsvRepository;
 import datastore.csv.FBPostLikeCsvRepository;
 import datastore.csv.FBTokenCsvRepository;
+import redis.clients.jedis.Jedis;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-public class DepencyInjector extends AbstractModule {
+public class FBCrawlerModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(FBPostRepository.class).toInstance(new FBPostCsvRepository());
@@ -26,5 +32,15 @@ public class DepencyInjector extends AbstractModule {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         bind(ExecutorService.class).toInstance(executorService);
 
+    }
+
+    @Provides
+    public Jedis provideJedis(){
+        return new Jedis("localhost");
+    }
+
+    @Provides
+    public Client provideClient(){
+        return ClientBuilder.newClient();
     }
 }

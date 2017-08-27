@@ -15,6 +15,8 @@
       <module name="java_concepts_test" target="1.8" />
       <module name="web-crawler_main" target="1.8" />
       <module name="web-crawler_test" target="1.8" />
+      <module name="webapp_main" target="1.8" />
+      <module name="webapp_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

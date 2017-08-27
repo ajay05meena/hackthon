@@ -2,11 +2,11 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import com.sun.jersey.api.client.Client;
+
 import fb.crawler.FBCrawler;
+import module.FBCrawlerModule;
 
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,11 +26,11 @@ public class Application {
     }
 
     private static Injector inject(){
-        Injector injector = Guice.createInjector(new DepencyInjector());
-        Client client = Client.create();
+        Injector injector = Guice.createInjector(new FBCrawlerModule());
+        //Client client = Client.create();
 
         //injector.injectMembers(executorService);
-        injector.injectMembers(client);
+        //injector.injectMembers(client);
         return injector;
     }
 }
