@@ -1,7 +1,7 @@
 package datastore.csv;
 
 import datastore.FBTokenRepository;
-import model.AccessToken;
+import fb.crawler.fb.model.AccessToken;
 
 
 import java.util.Collections;

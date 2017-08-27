@@ -1,4 +1,4 @@
-package fb.crawler.fb;
+package fb.crawler.fb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package fb.crawler.fb;
+package fb.crawler.fb.command;
 
 
 
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import fb.crawler.fb.model.Posts;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ws.rs.client.Client;

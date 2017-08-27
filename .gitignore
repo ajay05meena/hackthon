@@ -74,9 +74,9 @@ build/
 tokens
 pageIds
 fbpost
-src/main/resources/
-src/test/
+
 postComments
 postLikes
 .idea
-.idea/workspace.xml
+
+

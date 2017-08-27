@@ -1,6 +1,6 @@
 package datastore;
 
-import model.AccessToken;
+import fb.crawler.fb.model.AccessToken;
 
 public interface FBTokenRepository {
     String getRandomToken();

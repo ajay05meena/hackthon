@@ -1,4 +1,4 @@
-package model;
+package fb.crawler.fb.model;
 
 import lombok.Data;
 

@@ -3,21 +3,21 @@ package ex.app.service;
 
 import com.google.inject.Inject;
 import ex.app.model.request.UpdateTokenRequest;
-import fb.crawler.FBCrawler;
+import fb.crawler.FBCrawlerService;
 
 public class AppCrawlerService {
-    private final FBCrawler fbCrawler;
+    private final FBCrawlerService fbCrawlerService;
 
     @Inject
-    public AppCrawlerService(FBCrawler fbCrawler) {
-        this.fbCrawler = fbCrawler;
+    public AppCrawlerService(FBCrawlerService fbCrawlerService) {
+        this.fbCrawlerService = fbCrawlerService;
     }
 
     public void updateToken(UpdateTokenRequest request) {
-        fbCrawler.updateToken(request.getAccessToken());
+        fbCrawlerService.updateToken(request.getAccessToken());
     }
 
     public String getFbPageDetail(String pageId) {
-        return fbCrawler.getFBPageDetail(pageId);
+        return fbCrawlerService.getFBPageDetail(pageId);
     }
 }
