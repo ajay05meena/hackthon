@@ -1,7 +1,11 @@
 package ex.app.model.request;
 
-/**
- * Created by ajay.meena on 26/08/17.
- */
+import io.dropwizard.jackson.JsonSnakeCase;
+import lombok.Data;
+import model.AccessToken;
+
+@JsonSnakeCase
+@Data
 public class UpdateTokenRequest {
+    private AccessToken accessToken;
 }
