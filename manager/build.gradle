@@ -1,0 +1,29 @@
+group 'ex.crawler.fb'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+ext {
+    dropwizardVersion = '1.0.5'
+    dropwizardGuiceVersion = '1.0.0.3'
+
+}
+dependencies {
+    compile (project(':crawler'))
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile (group: 'com.hubspot.dropwizard', name: 'dropwizard-guice', version: dropwizardGuiceVersion){
+        exclude group: 'com.sun.jersey'
+    }
+    //compile group: 'redis.clients', name: 'jedis', version: '2.8.1'
+
+
+
+
+}
