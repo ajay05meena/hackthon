@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/concepts.iml" filepath="$PROJECT_DIR$/.idea/modules/concepts.iml" group="concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/concepts/concepts_main.iml" filepath="$PROJECT_DIR$/.idea/modules/concepts/concepts_main.iml" group="concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/concepts/concepts_test.iml" filepath="$PROJECT_DIR$/.idea/modules/concepts/concepts_test.iml" group="concepts" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crawler/crawler.iml" filepath="$PROJECT_DIR$/.idea/modules/crawler/crawler.iml" group="crawler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crawler/crawler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/crawler/crawler_main.iml" group="crawler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crawler/crawler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/crawler/crawler_test.iml" group="crawler" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds.iml" filepath="$PROJECT_DIR$/.idea/modules/ds.iml" group="ds" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds/ds_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ds/ds_main.iml" group="ds" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ds/ds_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ds/ds_test.iml" group="ds" />
@@ -14,12 +17,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts.iml" group="java_concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_main.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_main.iml" group="java_concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_test.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_test.iml" group="java_concepts" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler.iml" group="web-crawler" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_main.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_main.iml" group="web-crawler" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_test.iml" filepath="$PROJECT_DIR$/.idea/modules/web-crawler/web-crawler_test.iml" group="web-crawler" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapp.iml" filepath="$PROJECT_DIR$/.idea/modules/webapp.iml" group="webapp" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapp/webapp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/webapp/webapp_main.iml" group="webapp" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapp/webapp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/webapp/webapp_test.iml" group="webapp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager.iml" group="manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" group="manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" group="manager" />
     </modules>
   </component>
 </project>
