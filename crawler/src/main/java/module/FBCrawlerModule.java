@@ -13,6 +13,7 @@ import datastore.csv.FBPostCsvRepository;
 import datastore.csv.FBPostLikeCsvRepository;
 import datastore.memory.FBTokenInMemoryRepository;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -34,8 +35,8 @@ public class FBCrawlerModule extends AbstractModule {
     }
 
     @Provides
-    public Jedis provideJedis(){
-        return new Jedis("localhost");
+    public JedisPool provideJedisPool(){
+        return new JedisPool("localhost");
     }
 
     @Provides

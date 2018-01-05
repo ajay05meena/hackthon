@@ -6,6 +6,7 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import datastore.FBTokenRepository;
 import fb.crawler.fb.Constants;
+import fb.crawler.fb.model.FBPageDetail;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ws.rs.client.Client;
@@ -14,7 +15,7 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 @Slf4j
-public class GetFbPageDetailCommand extends HystrixCommand<String> {
+public class GetFbPageDetailCommand extends HystrixCommand<FBPageDetail> {
     private final Client client;
     private String pageId;
     private final FBTokenRepository fbTokenRepository;
@@ -26,11 +27,11 @@ public class GetFbPageDetailCommand extends HystrixCommand<String> {
     }
 
     @Override
-    protected String run() throws Exception {
+    protected FBPageDetail run() throws Exception {
         String token = fbTokenRepository.getRandomToken();
-        URI uri = UriBuilder.fromUri(Constants.BASE_URL).path(this.pageId).queryParam(Constants.ACCESS_TOKEN_LABEL, token).build();
+        URI uri = UriBuilder.fromUri(Constants.BASE_URL).path(this.pageId).queryParam("fields", "id,name,likes").queryParam(Constants.ACCESS_TOKEN_LABEL, token).build();
         log.info("Get call {}", uri);
-        return client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
+        return client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(FBPageDetail.class);
 
     }
 
