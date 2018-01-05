@@ -19,4 +19,7 @@ public class RedisClientProvider implements Provider<Jedis> {
     public Jedis get() {
         return jedisPool.getResource();
     }
+
+
+
 }

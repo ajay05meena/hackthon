@@ -34,13 +34,5 @@ public class FBCrawlerModule extends AbstractModule {
 
     }
 
-    @Provides
-    public JedisPool provideJedisPool(){
-        return new JedisPool("localhost");
-    }
 
-    @Provides
-    public Client provideClient(){
-        return ClientBuilder.newClient();
-    }
 }

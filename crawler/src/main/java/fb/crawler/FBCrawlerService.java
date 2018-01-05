@@ -6,6 +6,7 @@ import cp.redis.RedisClientProvider;
 import fb.crawler.fb.FeedData;
 import fb.crawler.fb.model.FBPageDetail;
 import lombok.extern.slf4j.Slf4j;
+import redis.clients.jedis.Jedis;
 
 
 import javax.inject.Inject;
@@ -34,13 +35,22 @@ public class FBCrawlerService {
 
 
     public FBPageDetail getFBPageDetail(String pageId){
-        if(redisClientProvider.get().exists(pageId) && CACHE_ACTIVE){
-            return StringToObject(redisClientProvider.get().get(pageId), FBPageDetail.class);
-        }else{
-            FBPageDetail detail =fetchPostsProvider.get().pageDetail(pageId);
-            redisClientProvider.get().set(pageId, objectToString(detail));
-            return detail;
+        FBPageDetail fbPageDetail;
+        Jedis jedis =  redisClientProvider.get();
+        try {
+            if(jedis.exists(pageId) && CACHE_ACTIVE){
+                fbPageDetail = StringToObject(jedis.get(pageId), FBPageDetail.class);
+            }else{
+                fbPageDetail =fetchPostsProvider.get().pageDetail(pageId);
+                jedis.set(pageId, objectToString(fbPageDetail));
+            }
+        }catch (Exception e){
+            log.error("{}",e);
+            fbPageDetail = null;
+        }finally {
+            jedis.close();
         }
+        return fbPageDetail;
     }
 
     private FBPageDetail StringToObject(String s, Class<FBPageDetail> fbPageDetailClass) {
