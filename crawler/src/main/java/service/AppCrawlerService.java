@@ -3,6 +3,9 @@ package service;
 
 import com.google.inject.Inject;
 import fb.crawler.FBCrawlerService;
+import fb.crawler.fb.model.FBPageDetail;
+
+import java.io.IOException;
 
 public class AppCrawlerService {
     private final FBCrawlerService fbCrawlerService;
@@ -14,7 +17,7 @@ public class AppCrawlerService {
 
 
 
-    public String getFbPageDetail(String pageId) {
+    public FBPageDetail getFbPageDetail(String pageId) {
         return fbCrawlerService.getFBPageDetail(pageId);
     }
 }

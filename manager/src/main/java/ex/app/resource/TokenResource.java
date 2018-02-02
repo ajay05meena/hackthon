@@ -4,6 +4,7 @@ import fb.crawler.fb.model.AccessToken;
 import service.TokenService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,7 +31,7 @@ public class TokenResource {
     }
 
     @POST
-    public AccessToken addToken(AccessToken accessToken){
+    public AccessToken addToken(@Valid AccessToken accessToken){
         return tokenService.addToken(accessToken);
     }
 

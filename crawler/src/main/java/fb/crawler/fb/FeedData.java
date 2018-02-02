@@ -7,6 +7,7 @@ import fb.crawler.fb.command.FetchFBPostCommand;
 import fb.crawler.fb.command.FetchFBPostCommentCommand;
 import fb.crawler.fb.command.FetchFBPostLikeCommand;
 import fb.crawler.fb.command.GetFbPageDetailCommand;
+import fb.crawler.fb.model.FBPageDetail;
 import fb.crawler.fb.model.Posts;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +38,7 @@ public class FeedData {
         this.dataStoreService = dataStoreService;
     }
 
-    public String pageDetail(String fbPageId){
+    public FBPageDetail pageDetail(String fbPageId){
         return getFbPageDetailCommandProvider.get().withPageId(fbPageId).execute();
     }
 

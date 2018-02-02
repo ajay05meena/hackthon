@@ -42,3 +42,6 @@ logging:
       timeZone: UTC
       maxFileSize: 10MB
 
+jedisPoolConfig:
+  testOnBorrow: true
+

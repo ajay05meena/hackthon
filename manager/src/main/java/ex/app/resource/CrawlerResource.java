@@ -3,6 +3,7 @@ package ex.app.resource;
 
 import com.google.inject.Inject;
 import fb.crawler.fb.model.AccessToken;
+import fb.crawler.fb.model.FBPageDetail;
 import service.AppCrawlerService;
 import service.TokenService;
 
@@ -15,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -33,7 +35,7 @@ public class CrawlerResource {
 
     @GET
     @Path("page/{fbPageId}/detail")
-    public String getFbPageDetail(@PathParam("fbPageId") String pageId){
+    public FBPageDetail getFbPageDetail(@PathParam("fbPageId") String pageId){
         return appCrawlerService.getFbPageDetail(pageId);
     }
 }
