@@ -17,6 +17,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts.iml" group="java_concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_main.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_main.iml" group="java_concepts" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_test.iml" filepath="$PROJECT_DIR$/.idea/modules/java_concepts/java_concepts_test.iml" group="java_concepts" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka.iml" group="kafka" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka/kafka_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka/kafka_main.iml" group="kafka" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka/kafka_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka/kafka_test.iml" group="kafka" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager.iml" group="manager" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_main.iml" group="manager" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" filepath="$PROJECT_DIR$/.idea/modules/manager/manager_test.iml" group="manager" />

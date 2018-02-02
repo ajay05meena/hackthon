@@ -1,0 +1,24 @@
+Producer api
+Consumer api
+Streams api
+Connector api
+
+Topic
+    Multi subscriber
+
+ps aux | grep server-1.properties
+
+Command line
+    create topic
+        kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+    run producer
+        kafka-console-producer --broker-list localhost:9092 --topic test
+    run consumer
+        kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning
+
+    create replicated topic
+        kafka-topics --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic
+
+    describe topic
+        kafka-topics --describe --zookeeper localhost:2181 --topic my-replicated-topic
+
