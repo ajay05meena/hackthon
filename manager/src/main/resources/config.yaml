@@ -45,3 +45,13 @@ logging:
 jedisPoolConfig:
   testOnBorrow: true
 
+kafkaConfig:
+  bootstrapServer: "localhost:9092"
+  acks: "all"
+  retries: 0
+  lingerMs: 0
+  batchSize: 16384
+  keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+  valueSerializer: "org.apache.kafka.common.serialization.StringSerializer"
+
+

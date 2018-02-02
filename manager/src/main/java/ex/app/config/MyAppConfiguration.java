@@ -2,6 +2,7 @@ package ex.app.config;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import example.kafka.config.KafkaConfig;
 import io.dropwizard.Configuration;
 import lombok.Data;
 import redis.clients.jedis.JedisPoolConfig;
@@ -10,6 +11,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class MyAppConfiguration extends Configuration{
     private String name;
     private JedisPoolConfig jedisPoolConfig;
+    private KafkaConfig kafkaConfig;
 
 
 }

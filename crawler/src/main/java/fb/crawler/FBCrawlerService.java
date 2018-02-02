@@ -20,7 +20,7 @@ public class FBCrawlerService {
     private final RedisClientProvider redisClientProvider;
     private final Provider<FeedData> fetchPostsProvider;
     private final HashMap<String, String> fetchPostLock = new HashMap<>();
-    private final static boolean CACHE_ACTIVE = true;
+    private final static boolean CACHE_ACTIVE = false;
     private final ObjectMapper objectMapper;
 
     @Inject

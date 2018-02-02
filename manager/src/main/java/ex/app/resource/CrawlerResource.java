@@ -2,22 +2,16 @@ package ex.app.resource;
 
 
 import com.google.inject.Inject;
-import fb.crawler.fb.model.AccessToken;
+import example.kafka.producer.MyKafkaProducer;
 import fb.crawler.fb.model.FBPageDetail;
 import service.AppCrawlerService;
-import service.TokenService;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.util.List;
 
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,17 +19,21 @@ import java.util.List;
 @Path("/crawler/")
 public class CrawlerResource {
     private final AppCrawlerService appCrawlerService;
+    private final MyKafkaProducer myKafkaProducer;
 
 
     @Inject
-    public CrawlerResource(AppCrawlerService appCrawlerService) {
+    public CrawlerResource(AppCrawlerService appCrawlerService, MyKafkaProducer myKafkaProducer) {
         this.appCrawlerService = appCrawlerService;
+        this.myKafkaProducer = myKafkaProducer;
     }
 
 
     @GET
     @Path("page/{fbPageId}/detail")
     public FBPageDetail getFbPageDetail(@PathParam("fbPageId") String pageId){
-        return appCrawlerService.getFbPageDetail(pageId);
+        FBPageDetail detail =  appCrawlerService.getFbPageDetail(pageId);
+        myKafkaProducer.publish("my-replicated-topic", detail.toString());
+        return detail;
     }
 }

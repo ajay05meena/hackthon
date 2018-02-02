@@ -21,7 +21,7 @@ public class GetFbPageDetailCommand extends HystrixCommand<FBPageDetail> {
     private final FBTokenRepository fbTokenRepository;
     @Inject
     protected GetFbPageDetailCommand(Client client, FBTokenRepository fbTokenRepository) {
-        super(HystrixCommandGroupKey.Factory.asKey("pageDetail"));
+        super(HystrixCommandGroupKey.Factory.asKey("pageDetail"), 10000);
         this.client = client;
         this.fbTokenRepository = fbTokenRepository;
     }

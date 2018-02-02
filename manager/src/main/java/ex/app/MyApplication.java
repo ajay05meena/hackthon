@@ -2,12 +2,14 @@ package ex.app;
 
 
 
+import com.google.inject.Stage;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import ex.app.config.MyAppConfiguration;
 import ex.app.module.MyAppModule;
 import ex.app.resource.CrawlerResource;
 import ex.app.resource.AppHeathCheckResource;
 import ex.app.resource.TokenResource;
+import example.kafka.config.KafkaModule;
 import io.dropwizard.Application;
 
 
@@ -27,8 +29,9 @@ public class MyApplication extends Application<MyAppConfiguration> {
     public void initialize(Bootstrap<MyAppConfiguration> bootstrap){
         GuiceBundle<MyAppConfiguration> guiceBundle = GuiceBundle.<MyAppConfiguration>newBuilder()
                 .addModules(new MyAppModule(), new FBCrawlerModule())
+                .addModule(new KafkaModule())
                 .setConfigClass(MyAppConfiguration.class)
-                .build();
+                .build(Stage.DEVELOPMENT);
         bootstrap.addBundle(guiceBundle);
     }
 

@@ -8,6 +8,9 @@ Topic
 
 ps aux | grep server-1.properties
 
+api documentation
+    https://kafka.apache.org/documentation/#api
+
 Command line
     create topic
         kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
