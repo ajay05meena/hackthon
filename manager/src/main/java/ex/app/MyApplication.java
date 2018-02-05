@@ -5,10 +5,12 @@ package ex.app;
 import com.google.inject.Stage;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import ex.app.config.MyAppConfiguration;
+import ex.app.managed.MyAppManaged;
 import ex.app.module.MyAppModule;
 import ex.app.resource.CrawlerResource;
 import ex.app.resource.AppHeathCheckResource;
 import ex.app.resource.TokenResource;
+import example.kafka.KafkaResource;
 import example.kafka.config.KafkaModule;
 import io.dropwizard.Application;
 
@@ -23,6 +25,7 @@ public class MyApplication extends Application<MyAppConfiguration> {
         environment.jersey().register(AppHeathCheckResource.class);
         environment.jersey().register(CrawlerResource.class);
         environment.jersey().register(TokenResource.class);
+        environment.jersey().register(KafkaResource.class);
     }
 
     @Override

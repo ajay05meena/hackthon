@@ -10,8 +10,11 @@ ps aux | grep server-1.properties
 
 api documentation
     https://kafka.apache.org/documentation/#api
+    https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/
 
 Command line
+    start kafka
+        zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties & kafka-server-start /usr/local/etc/kafka/server.properties
     create topic
         kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
     run producer
