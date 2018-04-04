@@ -38,4 +38,17 @@ public class CrawlerResource {
     public FBPageDetail getFbPageDetail(@PathParam("fbPageId") String pageId){
         return appCrawlerService.getFbPageDetail(pageId);
     }
+
+    @GET
+    @Path("page/{fbPageId}/feed")
+    public String getFBPageFeed(@PathParam("fbPageId") String pageId){
+        return appCrawlerService.getFbPageFeed(pageId);
+    }
+
+    @POST
+    @Path("/post/comment/populator")
+    public void populateComments(){
+        appCrawlerService.populateComment();
+    }
+
 }

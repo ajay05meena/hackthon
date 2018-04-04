@@ -20,4 +20,13 @@ public class AppCrawlerService {
     public FBPageDetail getFbPageDetail(String pageId) {
         return fbCrawlerService.getFBPageDetail(pageId);
     }
+
+    public String getFbPageFeed(String pageId){
+         fbCrawlerService.fetchFeedDataForPost(pageId);
+         return "done";
+    }
+
+    public void populateComment() {
+        fbCrawlerService.populateComment();
+    }
 }
