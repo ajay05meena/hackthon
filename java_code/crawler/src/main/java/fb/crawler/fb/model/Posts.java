@@ -59,6 +59,13 @@ public class Posts {
         private String name;
     }
 
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class CommentsWrapper{
+        private Comments comments;
+    }
+
     @Data
     public static class Comments{
         private List<Comment> data;

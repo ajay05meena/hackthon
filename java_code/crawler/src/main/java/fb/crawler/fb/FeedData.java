@@ -16,6 +16,7 @@ import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,25 +44,27 @@ public class FeedData {
     }
 
 
-    public boolean run(String fbPageId){
+    public List<PostDao> getFeed(String fbPageId){
+        List<PostDao> result = new ArrayList<>();
         URI uri = getUriToFetchPostForFBpage(fbPageId);
         Posts posts = fetchPostCommandProvider.get().withUri(uri).execute();
-        Optional<URI> nextPageUri = processPosts(posts);
+        Optional<URI> nextPageUri = getNextPostPageUri(posts);
+        result.addAll(insertData(posts));
         while (nextPageUri.isPresent()){
             posts = fetchPostCommandProvider.get().withUri(nextPageUri.get()).execute();
-            nextPageUri = processPosts(posts);
+            nextPageUri = getNextPostPageUri(posts);
+            result.addAll(insertData(posts));
         }
-        return true;
+        return result;
     }
 
-    private Optional<URI> processPosts(Posts posts) {
-        Optional<URI> nextPageUri = getNextPostPageUri(posts);
+    private List<PostDao> insertData(Posts posts) {
         List<PostDao> postDaoList =  Adaptor.convertToPostDao(posts.getData());
-        fetchUserLikesFromPosts(posts);
-        fetchCommentsFromPosts(posts);
+        //fetchUserLikesFromPosts(posts);
+        //fetchCommentsFromPosts(posts);
         int numOfPostInserted = dataStoreService.persistPosts(postDaoList);
         log.debug("Post persisted " + numOfPostInserted);
-        return nextPageUri;
+        return postDaoList;
     }
 
 
@@ -69,12 +72,13 @@ public class FeedData {
     private void fetchUserLikesFromPosts(Posts posts) {
         log.debug("Likes.........");
         String postId = posts.getData().get(0).getId();
-        posts.getData().parallelStream().map(Posts.Post::getLikes).forEach(p -> getUserLikesFromLikes(p, postId));
+        posts.getData().parallelStream().map(Posts.Post::getLikes).forEach(p -> getUserLikesFromLikes(null, postId));
 
 
     }
 
     private void getUserLikesFromLikes(Posts.Likes likes, String postId) {
+        likes = fetchFBPostLikeCommandProvider.get().withUri(getUriToFetchPostLikesForFBpage(postId)).execute();
         Optional<URI> nextPageUri = processUserLikes(likes, postId);
         while (nextPageUri.isPresent()){
             likes = fetchFBPostLikeCommandProvider.get().withUri(nextPageUri.get()).execute();
@@ -99,28 +103,44 @@ public class FeedData {
 
     private void fetchCommentsFromPosts(Posts posts) {
         String postId = posts.getData().get(0).getId();
-        posts.getData().parallelStream().map(Posts.Post::getComments).forEach(cs -> fetchComments(cs, postId));
+        posts.getData().parallelStream().map(Posts.Post::getComments).forEach(cs -> fetchComments( postId));
     }
 
-    private void fetchComments(Posts.Comments cs, String postId) {
-        Optional<URI> nextPageUri = processComments(cs, postId);
+    private List<PostCommentDao> fetchComments(String postId) {
+        List<PostCommentDao> res = new ArrayList<>();
+        Posts.CommentsWrapper cs = fetchFBPostCommentCommandProvider.get().withUri(getUriToFetchPostCommentsForFBpage(postId)).execute();
+        Optional<URI> nextPageUri = getNextPostPageUri(cs.getComments());
+        res.addAll(processComments(cs, postId));
         while (nextPageUri.isPresent()){
             cs = fetchFBPostCommentCommandProvider.get().withUri(nextPageUri.get()).execute();
-            nextPageUri = processComments(cs, postId);
+            nextPageUri = getNextPostPageUri(cs.getComments());
+            res.addAll(processComments(cs, postId));
         }
+        return res;
     }
 
-    private Optional<URI> processComments(Posts.Comments cs, String postId) {
-        List<Posts.Comment> comments = cs.getData();
+    private List<PostCommentDao> processComments(Posts.CommentsWrapper cs, String postId) {
+        if(cs==null|| cs.getComments()==null){
+            return new ArrayList<>();
+        }
+        List<Posts.Comment> comments = cs.getComments().getData();
         List<PostCommentDao> postCommentDaoList = Adaptor.convertToCommentDao(comments, postId);
         int persisted = dataStoreService.persistPostComments(postCommentDaoList);
         log.debug("Post Comments persisted "+ persisted);
-        return getNextPostPageUri(cs);
+        return postCommentDaoList;
     }
 
     private Optional<URI> getNextPostPageUri(Posts.Comments cs) {
+        if(cs==null || cs.getPaging()==null||cs.getPaging().getNext()==null){
+            return Optional.empty();
+        }
         Optional<Posts.Paging> nextUri = Optional.ofNullable(cs.getPaging());
-        return nextUri.flatMap(s -> Optional.ofNullable(UriBuilder.fromUri(s.getNext()).build()));
+        if(nextUri.isPresent()){
+            return nextUri.flatMap(s -> Optional.ofNullable(UriBuilder.fromUri(s.getNext()).build()));
+        }else{
+            return Optional.empty();
+        }
+
     }
 
 
@@ -132,5 +152,18 @@ public class FeedData {
 
     private URI getUriToFetchPostForFBpage(String fbPageId) {
         return UriBuilder.fromUri(Constants.BASE_URL).path(fbPageId + "/" + Constants.POSTS_LABEL).build();
+    }
+
+    private URI getUriToFetchPostLikesForFBpage(String postId) {
+        return UriBuilder.fromUri(Constants.BASE_URL).path(postId + "/" + Constants.POSTS_LIKES).build();
+    }
+
+
+    private URI getUriToFetchPostCommentsForFBpage(String postId) {
+        return UriBuilder.fromUri(Constants.BASE_URL).path(postId).queryParam( "fields" ,Constants.POSTS_COMMENTS).build();
+    }
+
+    public List<PostCommentDao> comments(String postId) {
+        return fetchComments(postId);
     }
 }

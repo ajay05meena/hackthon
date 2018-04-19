@@ -5,6 +5,7 @@ import datastore.dao.PostDao;
 import datastore.dao.PostLikeDao;
 import fb.crawler.fb.model.Posts;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,9 @@ public class Adaptor {
     }
 
      static List<PostCommentDao> convertToCommentDao(List<Posts.Comment> comments, String postId) {
-        return comments.stream().map(c -> new PostCommentDao(c.getId(), c.getFrom().getId(), c.getFrom().getName(), c.getMessage(),postId)).collect(Collectors.toList());
+         if(comments ==null){
+             return new ArrayList<>();
+         }
+         return comments.stream().map(c -> new PostCommentDao(c.getId(), c.getId().split("_")[0], null, c.getMessage(),postId)).collect(Collectors.toList());
     }
 }
